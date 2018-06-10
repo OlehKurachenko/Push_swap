@@ -1,0 +1,11 @@
+{
+    "name": "okurache_push_swap",
+    "author": "Oleh Kurachenko aka okurache",
+    "version": "0.0.1",
+    "description": "Study project from UNIT Factory (aka 42School Kiev)",
+    "url": "https://github.com/OlehKurachenko/Push_swap",
+    "email": "oleh.kurachenko@gmail.com",
+    "dependencies": {},
+    "c3pm_version": "v0.2",
+    "whatIsC3pm": "https://github.com/c3pm/c3pm"
+}
