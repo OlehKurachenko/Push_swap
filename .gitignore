@@ -2,3 +2,6 @@ imports/**
 .c3pm_clonedir/**
 cmake-build-debug/**
 .idea/**
+src/algo_prorotype/cmake-build-debug/**
+src/algo_prorotype/.idea/**
+
