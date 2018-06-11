@@ -1,0 +1,72 @@
+qsort with no optimizations:
+    3 numbers:      10
+    5 numbers:      24
+    50 numbers:     572
+    100 numbers:    1344
+    500 numbers:    8976
+
+    Performance results on stack size 500 in 1000 runs:
+     worst   : 8976
+     best    : 8976
+     average : 8976
+
+qsort with 2-swap:
+
+    Performance results on stack size 3 in 1000 runs:
+     worst   : 7
+     best    : 6
+     average : 6.493
+
+    Performance results on stack size 5 in 1000 runs:
+     worst   : 18
+     best    : 16
+     average : 17.037
+
+    Performance results on stack size 50 in 1000 runs:
+     worst   : 515
+     best    : 500
+     average : 508.924
+
+    Performance results on stack size 100 in 1000 runs:
+     worst   : 1227
+     best    : 1200
+     average : 1217.769
+
+    Performance results on stack size 500 in 1000 runs:
+     worst   : 8146
+     best    : 8000
+     average : 8121.607
+
+qsort with 2-swap && already-sorted
+
+    Performance results on stack size 3 in 1000 runs:
+     worst   : 7
+     best    : 0
+     average : 5.362
+
+    Performance results on stack size 5 in 1000 runs:
+     worst   : 18
+     best    : 0
+     average : 15.744
+
+    Performance results on stack size 50 in 1000 runs:
+     worst   : 515
+     best    : 0
+     average : 494.298
+
+    Performance results on stack size 100 in 1000 runs:
+     worst   : 1236
+     best    : 1140
+     average : 1188.126
+
+    Performance results on stack size 500 in 10000 runs:
+     worst   : 8244
+     best    : 7982
+     average : 8076.4592
+
+qsort with 2-swap && already-sorted && 3-swap
+
+    Performance results on stack size 500 in 10000 runs:
+     worst   : 8220
+     best    : 7925
+     average : 8052.7175

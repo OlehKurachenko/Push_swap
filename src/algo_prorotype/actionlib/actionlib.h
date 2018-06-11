@@ -22,6 +22,8 @@ namespace operations {
 
 	void	rev_rotate(std::vector<int> &stack, size_t &counter);
 
+	void 	swap(std::vector<int> &stack, size_t &counter);
+
 }
 
 std::ostream &operator<<(std::ostream &ostr, const std::vector<int> &vector);

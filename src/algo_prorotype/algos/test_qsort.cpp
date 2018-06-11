@@ -10,6 +10,145 @@
 
 #include "algos.h"
 
+static bool		sort_optimizations(std::vector<int> &o_stack,
+		std::vector<int> &secont_stack, size_t objective_size, size_t &counter,
+		bool assending_order)
+{
+	// 2-swap
+	if (objective_size == 2)
+	{
+		if ((assending_order && o_stack[o_stack.size() - 1]
+				> o_stack[o_stack.size() - 2])
+				|| (!assending_order && o_stack[o_stack.size() - 1]
+				< o_stack[o_stack.size() - 2]))
+			operations::swap(o_stack, counter);
+		return true;
+	}
+
+	// already-sorted
+	if (!assending_order) {
+		if (std::is_sorted(o_stack.end() - objective_size, o_stack.end()))
+			return true;
+	}
+
+	if (assending_order) {
+		std::vector<int> temp(o_stack.end() - objective_size, o_stack.end());
+		std::reverse(temp.begin(), temp.end());
+		if (std::is_sorted(temp.begin(), temp.end()))
+			return true;
+	}
+
+	// 3-swap
+	if (objective_size == 3)
+	{
+		if (assending_order) {
+			if (o_stack[o_stack.size() - 1] < o_stack[o_stack.size() - 3]
+					&& o_stack[o_stack.size() - 3] < o_stack[o_stack.size() - 2])
+			{
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				return true;
+			}
+
+			if (o_stack[o_stack.size() - 2] < o_stack[o_stack.size() - 1]
+					&& o_stack[o_stack.size() - 1] < o_stack[o_stack.size() - 3])
+			{
+				operations::swap(o_stack, counter);
+				return true;
+			}
+
+			if (o_stack[o_stack.size() - 3] < o_stack[o_stack.size() - 1]
+					&& o_stack[o_stack.size() - 1] < o_stack[o_stack.size() - 2])
+			{
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				return true;
+			}
+
+			if (o_stack[o_stack.size() - 2] < o_stack[o_stack.size() - 3]
+					&& o_stack[o_stack.size() - 3] < o_stack[o_stack.size() - 2])
+			{
+				operations::swap(o_stack, counter);
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				return true;
+			}
+
+			if (o_stack[o_stack.size() - 3] < o_stack[o_stack.size() - 2]
+					&& o_stack[o_stack.size() - 2] < o_stack[o_stack.size() - 1])
+			{
+				operations::swap(o_stack, counter);
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				return true;
+			}
+		}
+
+		if (!assending_order) {
+			if (o_stack[o_stack.size() - 1] < o_stack[o_stack.size() - 3]
+					&& o_stack[o_stack.size() - 3] < o_stack[o_stack.size() - 2])
+			{
+				operations::swap(o_stack, counter);
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				return true;
+			}
+
+			if (o_stack[o_stack.size() - 2] < o_stack[o_stack.size() - 1]
+					&& o_stack[o_stack.size() - 1] < o_stack[o_stack.size() - 3])
+			{
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+			}
+
+			if (o_stack[o_stack.size() - 3] < o_stack[o_stack.size() - 1]
+					&& o_stack[o_stack.size() - 1] < o_stack[o_stack.size() - 2])
+			{
+				operations::swap(o_stack, counter);
+				return true;
+			}
+
+			if (o_stack[o_stack.size() - 2] < o_stack[o_stack.size() - 3]
+					&& o_stack[o_stack.size() - 3] < o_stack[o_stack.size() - 2])
+			{
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				return true;
+			}
+
+			if (o_stack[o_stack.size() - 1] < o_stack[o_stack.size() - 2]
+					&& o_stack[o_stack.size() - 2] < o_stack[o_stack.size() - 3])
+			{
+				operations::swap(o_stack, counter);
+				operations::rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				operations::rev_rotate(o_stack, counter);
+				operations::swap(o_stack, counter);
+				return true;
+			}
+		}
+	}
+
+
+
+//	if (objective_size == 3)
+//	{
+//
+//	}
+
+	return false;
+}
+
 static void		sort(std::vector<int> &object_stack,
 		std::vector<int> &secont_stack, size_t objective_size, size_t &counter,
 		bool assending_order) {
@@ -19,11 +158,15 @@ static void		sort(std::vector<int> &object_stack,
 	if (objective_size == 1)
 		return;
 
-	std::cout << "\033[1;36mState at call " << call_id << ":" << std::endl
-			  << "	object = " << object_stack << std::endl
-			  << "	second = " << secont_stack << std::endl
-			  << "	call size = " << objective_size << ", assending: "
-			  << assending_order << "\033[0;0m" << std::endl;
+	if (sort_optimizations(object_stack, secont_stack, objective_size,
+			counter, assending_order))
+		return;
+
+//	std::cout << "\033[1;36mState at call " << call_id << ":" << std::endl
+//			  << "	object = " << object_stack << std::endl
+//			  << "	second = " << secont_stack << std::endl
+//			  << "	call size = " << objective_size << ", assending: "
+//			  << assending_order << "\033[0;0m" << std::endl;
 
 	std::vector<int>	objective(object_stack.end() - objective_size,
 			object_stack.end());
@@ -52,11 +195,11 @@ static void		sort(std::vector<int> &object_stack,
 	sort(object_stack, secont_stack, moved_to_down_of_object,
 			counter, assending_order);
 
-	std::cout << "\033[1;32mState at call " << call_id << ":" << std::endl
-			<< "	object = " << object_stack << std::endl
-			<< "	second = " << secont_stack << std::endl
-			<< "	call size = " << objective_size << ", assending: "
-			<< assending_order << "\033[0;0m" << std::endl;
+//	std::cout << "\033[1;32mState at call " << call_id << ":" << std::endl
+//			<< "	object = " << object_stack << std::endl
+//			<< "	second = " << secont_stack << std::endl
+//			<< "	call size = " << objective_size << ", assending: "
+//			<< assending_order << "\033[0;0m" << std::endl;
 }
 
 size_t			test_qsort(std::vector<int> stack)

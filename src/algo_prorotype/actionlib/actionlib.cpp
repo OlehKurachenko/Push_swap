@@ -37,6 +37,15 @@ void	operations::rev_rotate(std::vector<int> &stack, size_t &counter)
 	++counter;
 }
 
+void 	operations::swap(std::vector<int> &stack, size_t &counter)
+{
+	if (stack.size() >= 2)
+	{
+		std::swap(stack[stack.size() - 1], stack[stack.size() - 2]);
+	}
+	++counter;
+}
+
 std::ostream &operator<<(std::ostream &ostr, const std::vector<int> &vector)
 {
 	ostr << '[';
