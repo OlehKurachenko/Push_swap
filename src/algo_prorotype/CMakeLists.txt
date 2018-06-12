@@ -10,4 +10,5 @@ add_executable(
         algos/algos.h
         actionlib/actionlib.cpp
         algos/test_qsort.cpp
+        algos/test_inplace_qsort.cpp
 )

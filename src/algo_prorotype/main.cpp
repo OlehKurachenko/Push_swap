@@ -12,10 +12,10 @@
 #include "algos/algos.h"
 
 #include <random>
-//#include <chrono>
+#include <chrono>
 
 int main() {
-	const size_t test_stack_size{ 500 };
+	const size_t test_stack_size{ 3 };
 
 	const size_t number_of_tests{ 10000 };
 	size_t worst_case{ 0 };
@@ -26,7 +26,7 @@ int main() {
 	for (size_t i{ 0 }; i < test_stack_size; ++i)
 		test1[i] = static_cast<int>(i);
 
-	sum = worst_case = best_case = test_qsort(test1);
+	sum = worst_case = best_case = test_inplace_qsort(test1);
 
 	for (size_t i{ 1 }; i < number_of_tests; ++i)
 	{
@@ -34,7 +34,7 @@ int main() {
 				static_cast<unsigned int>(std::chrono::system_clock::now()
 						.time_since_epoch().count())));
 
-		size_t test_result { test_qsort(test1) };
+		size_t test_result { test_inplace_qsort(test1) };
 		worst_case = std::max(worst_case, test_result);
 		best_case = std::min(best_case, test_result);
 		sum += test_result;

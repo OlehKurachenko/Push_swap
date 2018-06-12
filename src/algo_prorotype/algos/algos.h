@@ -19,4 +19,6 @@
 
 size_t	test_qsort(std::vector<int> stack);
 
+size_t	test_inplace_qsort(const std::vector<int> &stack);
+
 #endif
